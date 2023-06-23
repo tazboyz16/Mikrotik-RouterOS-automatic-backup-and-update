@@ -15,7 +15,7 @@
 #
 #----------MODIFY THIS SECTION AS NEEDED----------------------------------------
 ## Notification e-mail
-## (Make sure you have configurated Email settings in Tools -> Email)
+## (Make sure you have configured the Email settings in Tools -> Email)
 :local emailAddress "yourmail@example.com";
 
 ## Script mode, possible values: backup, osupdate, osnotify.
@@ -250,7 +250,7 @@ if ([:len [/system identity get name]] = 0 or [/system identity get name] = "Mik
         :if ([:len $deviceOsVerAvail] = 0) do={
             :log warning ("$SMP There is a problem getting information about new RouterOS from server.");
             :set mailSubject    ($mailSubject . " Error: No data about new RouterOS!")
-            :set mailBody         ($mailBody . "Error occured! \r\nMikrotik couldn't get any information about new RouterOS from server! \r\nWatch additional information in device logs.")
+            :set mailBody         ($mailBody . "Error occurred! \r\nMikrotik couldn't get any information about new RouterOS from server! \r\nWatch additional information in device logs.")
         } else={
             #Get numeric version of OS
             :set deviceOsVerAvailNum [$buGlobalFuncGetOsVerNum paramOsVer=$deviceOsVerAvail];
@@ -299,7 +299,7 @@ if ([:len [/system identity get name]] = 0 or [/system identity get name] = "Mik
                 }
             }
 
-            #Check again, because this variable could be changed during checking for installing only patch updats
+            #Check again, because this variable could be changed during checking for installing only patch updates
             if ($isOsNeedsToBeUpdated = true) do={
                 :log info           ("$SMP New RouterOS is going to be installed! v.$deviceOsVerInst -> v.$deviceOsVerAvail");
                 :set mailSubject    ($mailSubject . " New RouterOS is going to be installed! v.$deviceOsVerInst -> v.$deviceOsVerAvail.");
@@ -329,7 +329,7 @@ if ([:len [/system identity get name]] = 0 or [/system identity get name] = "Mik
         :log info ("$SMP There is no need to create a backup.");
     }
 
-    # Combine fisrst step email
+    # Combine first step email
     :set mailBody ($mailBody . $mailBodyDeviceInfo . $mailBodyCopyright);
 }
 
@@ -352,7 +352,7 @@ if ([:len [/system identity get name]] = 0 or [/system identity get name] = "Mik
         ## Reboot system to boot with new firmware
         /system reboot;
     } else={
-        :log info "$SMP It appers that your routerboard is already up to date, skipping this step.";
+        :log info "$SMP It appears that your routerboard is already up to date, skipping this step.";
         :set updateStep 3;
     };
 }
@@ -393,7 +393,7 @@ if ([:len [/system identity get name]] = 0 or [/system identity get name] = "Mik
 
             if ($isOsNeedsToBeUpdated = true) do={
                 :set isOsNeedsToBeUpdated false;
-                :log warning "$SMP script is not going to initialise update process due to inability to send backups to email."
+                :log warning "$SMP script is not going to initialize update process due to inability to send backups to email."
             }
         }
     }
